@@ -17,3 +17,14 @@ class ResponseModel(BaseModel, Generic[T]):
     code: int=0
     message: str="success"
     data: Optional[T]=None
+
+    model_config = {
+        "from_attributes": True
+    }
+
+class ErrorCode:
+    """业务错误码定义"""
+    PARAM_ERROR = 1000
+    AUTH_ERROR = 1001
+    DB_ERROR = 1002
+    UNKNOWN_ERROR = 1003

@@ -33,7 +33,7 @@ class AuthService:
         if user.password != login_in.password:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="密码错误")
         token = create_access_token({"user_id": user.id, "username": user.username})
-        return {"access_token": token, "token_type": "bearer"}
+        return token
 
     def get_profile(self, current_user):
         return current_user
