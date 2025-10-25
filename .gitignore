@@ -1,5 +1,26 @@
-.venv
-.idea
-./app/__pycache__
-main.py
-test_main.http
+# --- Python 缓存与编译产物 ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# --- 虚拟环境 ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- PyCharm 项目配置 ---
+.idea/
+
+# --- VSCode (以防万一) ---
+.vscode/
+
+# --- 系统文件 ---
+.DS_Store
+Thumbs.db
+
+# --- 测试报告或缓存 ---
+*.log
+*.pytest_cache/
