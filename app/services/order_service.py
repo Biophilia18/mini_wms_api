@@ -10,17 +10,18 @@
 from sqlalchemy.orm import Session
 
 from app.dao.order_dao import OrderDAO
+from app.schemas.order import OrderCreate
 
 
 class OrderService:
-    def __init__(self, db: Session):
+    def __init__(self):
         self.order_dao = OrderDAO()
 
-    def create_order(self, db: Session, order_no: str, user_id: int):
-        self.order_dao.create_order(db, order_no, user_id)
-        return f"订单创建成功：{order_no}"
+    def create_order(self, db: Session, order_in: OrderCreate):
+        order_data = order_in.model_dump()
+        new_order = self.order_dao.create(db, order_data)
+        return new_order
 
     def list_orders(self, db: Session):
-        orders = self.order_dao.get_all_orders(db)
-        return [f"{o.id}-{o.order_no}-{o.status}" for o in orders]
+        return self.order_dao.get_all(db)
 

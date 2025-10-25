@@ -6,19 +6,14 @@
 @File    : order_dao.py
 @Software: PyCharm
 @Notes   : 订单DAO层
+继承 BaseDAO，获得通用 CRUD 功能
 """
 from sqlalchemy.orm import Session
 
+from app.dao.base import BaseDAO
 from app.models.order import Order
 
 
-class OrderDAO:
-    def create_order(self, db: Session, order_no: str, user_id: int):
-        order = Order(order_no=order_no, user_id=user_id)
-        db.add(order)
-        db.commit()
-        db.refresh(order)
-        return order
-
-    def get_all_orders(self, db: Session):
-        return db.query(Order).all()
+class OrderDAO(BaseDAO[Order]):
+    def __init__(self):
+        super().__init__(Order)
