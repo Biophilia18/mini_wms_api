@@ -31,3 +31,4 @@ class ProductService:
     def list_products(self, db:Session):
         """查询全部商品"""
         return self.product_dao.get_all(db)
+

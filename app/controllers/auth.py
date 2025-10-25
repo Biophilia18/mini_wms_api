@@ -9,15 +9,12 @@
 """
 from fastapi import APIRouter
 from fastapi.params import Depends
-from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-
 from app.database import get_db
 from app.dependencies import get_current_user
 from app.schemas.base import ResponseModel
 from app.schemas.user import UserInfo, UserRegister, UserLogin
 from app.services.auth_service import AuthService
-from app.utils.jwt import create_access_token
 
 rt_auth = APIRouter(prefix="/auth", tags=["auth,用户接口"])
 auth_service = AuthService()
