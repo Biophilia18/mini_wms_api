@@ -7,10 +7,12 @@
 @Software: PyCharm
 @Notes   : 认证业务逻辑
 """
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from app.dao.user_dao import UserDAO
 from app.schemas.user import UserRegister, UserLogin, UserInfo
+from app.utils.jwt import create_access_token
+
 
 class AuthService:
     def __init__(self):
@@ -24,10 +26,14 @@ class AuthService:
         new_user = self.user_dao.create(db, user_data)
         return new_user
 
-    def login(self, db: Session, login_in: UserLogin)-> str:
+    def login(self, db: Session, login_in: UserLogin):
         user = self.user_dao.get_by_username(db, login_in.username)
         if not user:
-            raise HTTPException(status_code=404, detail="用户不存在")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="用户不存在")
         if user.password != login_in.password:
-            raise HTTPException(status_code=401, detail="密码错误")
-        return f"登录成功,欢迎 {user.username}"
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="密码错误")
+        token = create_access_token({"user_id": user.id, "username": user.username})
+        return {"access_token": token, "token_type": "bearer"}
+
+    def get_profile(self, current_user):
+        return current_user
