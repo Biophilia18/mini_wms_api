@@ -27,5 +27,6 @@ class UserInfo(BaseModel):
     email: str
     is_active: bool
 
-    class Config:
-        orm_mode = True # 允许从ORM模型自动转换
+    model_config = {
+        "from_attributes": True
+    }#  允许从ORM模型自动转换

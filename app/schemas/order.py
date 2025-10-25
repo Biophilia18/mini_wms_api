@@ -19,5 +19,6 @@ class OrderInfo(BaseModel):
     user_id: int
     status: str
 
-    class Config:
-        orm_mode = True
+    model_config = {
+        "from_attributes": True
+    }

@@ -9,11 +9,10 @@
 """
 from typing import TypeVar, Generic, Optional
 
-from pydantic.v1.generics import GenericModel
-
+from pydantic import BaseModel
 # 泛型 ，用于通用相应类型
 T = TypeVar('T')
-class ResponseModel(GenericModel, Generic[T]):
+class ResponseModel(BaseModel, Generic[T]):
     """统一响应格式"""
     code: int=0
     message: str="success"
