@@ -8,15 +8,15 @@
 @Notes   : 仓库业务逻辑
 """
 from sqlalchemy.orm import Session
-from app.dao.warehouse_dao import WareHouseDAO
+from app.dao.warehouse_dao import WarehouseDAO
 from app.middleware.exceptions import AppException
 from app.schemas.base import ErrorCode
 from app.schemas.warehouse import WarehouseCreate
 
 
-class WareHouseService:
+class WarehouseService:
     def __init__(self):
-        self.warehouse_dao = WareHouseDAO()
+        self.warehouse_dao = WarehouseDAO()
 
     def create_warehouse(self, db: Session, warehouse_in: WarehouseCreate):
         """创建新仓库"""

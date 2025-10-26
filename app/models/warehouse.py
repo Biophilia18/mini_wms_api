@@ -13,7 +13,7 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 
 
-class WareHouse(Base):
+class Warehouse(Base):
     __tablename__ = "warehouses"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), unique=True, nullable=False, comment="仓库名称")
@@ -28,4 +28,4 @@ class WareHouse(Base):
     #  Warehouse ↔ Inventory(1: N) - 一个仓库包含多个商品库存
     manager = relationship("User", backref="managed_warehouses")
     # 一个仓库有多个库存记录
-    # inventory_records = relationship("Inventory", back_populates="warehouse")
+    inventory_records = relationship("Inventory", back_populates="warehouse")

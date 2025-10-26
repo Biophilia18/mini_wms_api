@@ -15,10 +15,10 @@ from app.database import get_db
 from app.dependencies import get_current_user
 from app.schemas.base import ResponseModel
 from app.schemas.warehouse import WarehouseInfo, WarehouseCreate
-from app.services.warehouse_service import WareHouseService
+from app.services.warehouse_service import WarehouseService
 
 rt_warehouse = APIRouter(prefix="/warehouse", tags=["warehouse,仓库接口"])
-warehouse_service = WareHouseService()
+warehouse_service = WarehouseService()
 
 @rt_warehouse.post("/create",response_model=ResponseModel[WarehouseInfo])
 def create_warehouse(
