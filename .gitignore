@@ -22,6 +22,7 @@ ENV/
 Thumbs.db
 
 # --- 测试报告或缓存 ---
+/logs
 *.log
 *.pytest_cache/
 
