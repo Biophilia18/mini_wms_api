@@ -10,7 +10,7 @@
 import uvicorn
 from fastapi import FastAPI
 from app.database import Base, engine
-from app.controllers import auth, order, product, warehouse
+from app.controllers import auth, order, product, warehouse, inventory
 from app.middleware.log_middleware import LoggingMiddleware
 from app.middleware.exception_middleware import ExceptionMiddleware
 
@@ -28,6 +28,7 @@ app.include_router(auth.rt_auth)
 app.include_router(order.rt_order)
 app.include_router(product.rt_product)
 app.include_router(warehouse.rt_warehouse)
+app.include_router(inventory.rt_inventory)
 
 
 if __name__ == "__main__":
