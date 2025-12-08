@@ -13,6 +13,14 @@ from pydantic import BaseModel, Field
 
 
 class WarehouseCreate(BaseModel):
+    """
+    创建仓库请求体：
+        name : 仓库名称。
+        code : 仓库编码。
+        address : 仓库地址（可选）。
+        capacity : 仓库容量（可选，大于0）。
+        manager_id : 管理员用户ID。
+    """
     name: str = Field(..., min_length=2, max_length=100, description="仓库名称")
     code: str = Field(..., min_length=2, max_length=20, description="仓库编码")
     address: Optional[str] = Field(None, max_length=200, description="仓库地址")
@@ -20,7 +28,16 @@ class WarehouseCreate(BaseModel):
     manager_id: int = Field(..., gt=0, description="管理员用户id")
 
 class WarehouseInfo(BaseModel):
-    """仓库响应体"""
+    """
+    仓库信息响应体：
+        id : 仓库ID。
+        name : 仓库名称。
+        code : 仓库编码。
+        address : 仓库地址。
+        capacity : 仓库容量。
+        manager_id : 管理员用户ID。
+        is_active : 是否启用。
+    """
     id: int
     name: str
     code: str

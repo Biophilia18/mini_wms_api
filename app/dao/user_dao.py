@@ -16,11 +16,21 @@ from app.models.user import User
 
 
 class UserDAO(BaseDAO[User]):
+    """
+    用户数据访问层：
+        封装对用户表的基础操作（查询、创建、更新、删除）。
+        所有数据库会话在 Service 层统一管理。
+    """
     def __init__(self):
         super().__init__(User)
 
-    def get_by_username(self, db: Session, username: str):
-        """根据用户名查询用户"""
+    def get_by_username(self, db: Session, username: str) -> User | None:
+        """
+        根据用户名查询用户
+        :param db: 数据库会话
+        :param username: 用户名
+        :return: 匹配的用户对象，若不存在返回 None
+        """
         return db.query(User).filter(User.username == username).first()
 
     def get_by_email(self, db: Session, email: str):

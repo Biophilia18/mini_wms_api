@@ -44,13 +44,13 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             f"Status: {response.status_code} | "
             f"Time: {process_time:.2f} ms"
         }
-        # ✅ 成功和错误区分颜色等级
+        # 成功和错误区分颜色等级
         if response.status_code >= 400:
             logger.warning(log_message)
         else:
             logger.info(log_message)
 
         if process_time > SLOW_REQUEST_THRESHOLD_MS:
-            logger.warning(f"⚠️ Slow API Detected: {log_message}")
+            logger.warning(f">>> Slow API Detected: {log_message}")
 
         return response

@@ -27,7 +27,16 @@ def create_inventory(
         db: Session=Depends(get_db),
         current_user=Depends(get_current_user)
 ):
-    """创建库存记录"""
+    """
+    创建库存记录
+    :param inv_in:
+        inv_in.product_id : 商品ID
+        inv_in.warehouse_id : 仓库ID
+        inv_in.quantity : 初始库存数量
+    :param db:  数据库会话
+    :param current_user: 当前登录用户
+    :return: 新建库存记录信息
+    """
     inv = inventory_service.create_inventory(db, inv_in)
     return ResponseModel(data=inv)
 
@@ -38,7 +47,14 @@ def update_inventory(
         db: Session=Depends(get_db),
         current_user=Depends(get_current_user)
 ):
-    """修改库存数量"""
+    """
+    修改库存数量
+    :param inv_id: 库存记录ID
+    :param inv_update: 更新后的库存数量
+    :param db: 数据库会话
+    :param current_user: 当前登录用户
+    :return: 修改后的库存信息
+    """
     inv = inventory_service.update_quantity(db, inv_id, inv_update)
     return ResponseModel(data=inv)
 
@@ -48,7 +64,13 @@ def list_inventory_by_product(
         db: Session=Depends(get_db),
         current_user=Depends(get_current_user)
 ):
-    """查询某商品的所有库存"""
+    """
+    按商品ID查询库存
+    :param product_id: 商品ID
+    :param db: 数据库会话
+    :param current_user:
+    :return: 该商品在各仓库的库存列表 当前登录用户
+    """
     data = inventory_service.list_by_product(db, product_id)
     return ResponseModel(data=data)
 
@@ -58,6 +80,12 @@ def list_inventory_by_warehouse(
         db: Session=Depends(get_db),
         current_user=Depends(get_current_user)
 ):
-    """查询某仓库的的所有商品库存"""
+    """
+    按仓库ID查询库存
+    :param warehouse_id: 仓库ID
+    :param db:
+    :param current_user:
+    :return: 该仓库下所有商品的库存信息
+    """
     data = inventory_service.list_by_warehouse(db, warehouse_id)
     return ResponseModel(data=data)

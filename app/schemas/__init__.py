@@ -7,3 +7,8 @@
 @Software: PyCharm
 @Notes   :
 """
+"""
+该包用于定义所有 Pydantic 数据模型（schema）：
+    - 输入模型：请求参数验证。
+    - 输出模型：统一响应结构。
+"""

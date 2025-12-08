@@ -27,7 +27,17 @@ def record_stock_change(
         db: Session = Depends(get_db),
         current_user=Depends(get_current_user)
 ):
-    """记录一次出入库操作"""
+    """
+    记录一次出入库操作
+    :param stock_in:
+        stock_in.inventory_id : 库存记录ID
+        stock_in.action : 操作类型（IN、OUT、ADJUST）
+        stock_in.change_qty : 变动数量
+        stock_in.remark : 备注
+    :param db: 数据库会话
+    :param current_user: 当前登录用户
+    :return: 新增的出入库日志记录
+    """
     log = stock_service.record_stock_change(db, stock_in, current_user.id)
     return ResponseModel(data=log)
 
@@ -37,7 +47,13 @@ def list_logs_by_inventory(
         db: Session = Depends(get_db),
         current_user=Depends(get_current_user)
 ):
-    """查询某库存记录的历史变动"""
+    """
+    查询某库存记录的历史变动日志
+    :param inventory_id: 库存记录ID
+    :param db: 数据库会话
+    :param current_user: 当前登录用户
+    :return: 该库存的出入库历史记录
+    """
     logs = stock_service.list_logs_by_inventory(db, inventory_id)
     return ResponseModel(data=logs)
 

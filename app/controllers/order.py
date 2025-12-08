@@ -21,12 +21,26 @@ order_service = OrderService()
 
 @rt_order.post("/create", response_model=ResponseModel[OrderInfo])
 def create_order(order_in: OrderCreate, db: Session=Depends(get_db), current_user=Depends(get_current_user)):
-    # 自动从token获取当前用户id
+    """
+    创建订单
+    :param order_in:
+        order_in.order_no : 订单编号
+        order_in.status : 订单状态
+    :param db: 数据库会话
+    :param current_user: 当前登录用户，自动作为下单人
+    :return: 订单信息
+    """
     order_in.user_id = current_user.id
     new_order = order_service.create_order(db, order_in)
     return ResponseModel(data=new_order)
 
 @rt_order.post("/list", response_model=ResponseModel[List[OrderInfo]])
 def list_orders(db: Session=Depends(get_db), current_user=Depends(get_current_user)):
+    """
+    查询订单列表
+    :param db: 数据库会话
+    :param current_user: 当前登录用户
+    :return: 所有订单信息
+    """
     orders = order_service.list_orders(db)
     return ResponseModel(data=orders)

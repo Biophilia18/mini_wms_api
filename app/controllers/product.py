@@ -29,6 +29,17 @@ def create_product(
         db: Session = Depends(get_db),
         current_user=Depends(get_current_user)  # 登录保护
 ):
+    """
+    创建商品信息
+    :param product_in:
+        product_in.name : 商品名称
+        product_in.sku : 商品SKU编号
+        product_in.price : 商品单价
+        product_in.description : 商品描述
+    :param db: 数据库会话
+    :param current_user: 当前登录用户
+    :return: 新增商品的完整信息
+    """
     new_product = product_service.create_product(db, product_in)
     return ResponseModel(data=new_product)
 
@@ -38,6 +49,12 @@ def list_products(
         db: Session = Depends(get_db),
         current_user=Depends(get_current_user)
 ):
+    """
+    获取商品列表
+    :param db: 数据库会话
+    :param current_user: 当前登录用户
+    :return: 所有商品的基本信息列表
+    """
     products = product_service.list_products(db)
     return ResponseModel(data=products)
 
