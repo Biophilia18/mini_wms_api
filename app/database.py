@@ -11,7 +11,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 # 数据库链接信息
-DATABASE_URL = "mysql+pymysql://root:123456@127.0.0.1:3306/flask_demo"
+# DATABASE_URL = "mysql+pymysql://root:123456@127.0.0.1:3306/flask_demo"
+DATABASE_URL = "mysql+pymysql://root:123456@111.228.4.79:3307/wmsmini"
 # 创建数据库引擎
 engine = create_engine(DATABASE_URL, echo=True)
 # 创建Session工厂
