@@ -7,7 +7,7 @@
 @Desc    :
 @Notes   : 
 """
-from app.dao.outbound import OutboundOrderDAO, OutboundItemDAO
+from app.dao.outbound_dao import OutboundOrderDAO, OutboundItemDAO
 from app.dao.stock_log_dao import StockLogDAO
 from app.models.product import Product
 from app.models.stock_log import StockAction

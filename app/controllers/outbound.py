@@ -3,7 +3,7 @@
 @Time    : 2025/12/8 22:55
 @Author  : admin1
 @Project : fastapi_wms
-@File    : outbound.py
+@File    : outbound_dao.py
 @Desc    :
 @Notes   : 出库模块接口控制层（Controller）
 """
