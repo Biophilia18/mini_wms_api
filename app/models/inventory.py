@@ -20,7 +20,7 @@ class Inventory(Base):
     quantity = Column(Integer, nullable=False, default=0, comment="当前库存数量")
     # 关系定义
     product = relationship("Product", backref="inventories")
-    warehouse = relationship("Warehouse", backref="inventories")
+    warehouse = relationship("Warehouse", back_populates="inventories")
 
     # 一个仓库中一个商品只能有一条库存记录
     __table_args__ = (

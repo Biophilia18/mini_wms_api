@@ -15,9 +15,10 @@ from app.database import Base
 
 
 class StockAction(str, enum.Enum):
-    IN = 'in' # 入库
-    OUT = 'out' # 出库
-    ADJUST = 'adjust'  #盘点调整
+    IN = 'IN' # 入库
+    OUT = 'OUT' # 出库
+    ADJUST = 'ADJUST'  #盘点调整
+    TRANSFER = "TRANSFER"  # 调拨
 
 class StockLog(Base):
     __tablename__ = 'stock_logs'

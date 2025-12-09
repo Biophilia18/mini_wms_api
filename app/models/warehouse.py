@@ -28,4 +28,4 @@ class Warehouse(Base):
     #  Warehouse ↔ Inventory(1: N) - 一个仓库包含多个商品库存
     manager = relationship("User", backref="managed_warehouses")
     # 一个仓库有多个库存记录
-    inventory_records = relationship("Inventory", back_populates="warehouse", overlaps="inventories")
+    inventories = relationship("Inventory", back_populates="warehouse")
